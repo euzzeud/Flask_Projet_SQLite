@@ -93,7 +93,7 @@ def authentification_user():
 @app.route('/fiche_nom/', methods=['GET', 'POST'])
 def fiche_nom():
     # Protection USER
-    if not est_authentifie_user():
+    if not est_authentifie():
         return redirect(url_for('authentification_user'))
 
     data = []
