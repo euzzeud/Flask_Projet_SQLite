@@ -12,6 +12,10 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Clé secrète pour les sessions
 def est_authentifie():
     return session.get('authentifie')
 
+def est_authentifie_user():
+    return session.get('authentifie_user')
+
+
 @app.route('/')
 def hello_world():
     return render_template('hello.html')
@@ -83,17 +87,18 @@ def enregistrer_client():
 def authentification_user():
     if request.method == 'POST':
         if request.form['username'] == 'user' and request.form['password'] == '12345':
-            session['authentifie'] = True
+            session['authentifie_user'] = True
             return redirect(url_for('fiche_nom'))
         else:
             return render_template('formulaire_authentification.html', error=True)
 
     return render_template('formulaire_authentification.html', error=False)
 
+
 @app.route('/fiche_nom/', methods=['GET', 'POST'])
 def fiche_nom():
     # Protection USER
-    if not est_authentifie():
+    if not est_authentifie_user():
         return redirect(url_for('authentification_user'))
 
     data = []
