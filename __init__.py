@@ -90,9 +90,9 @@ def authentification_user():
             session['authentifie_user'] = True
             return redirect(url_for('fiche_nom'))
         else:
-            return render_template('formulaire_authentification.html', error=True)
+            return render_template('formulaire_authentification_user.html', error=True)
 
-    return render_template('formulaire_authentification.html', error=False)
+    return render_template('formulaire_authentification_user.html', error=False)
 
 
 @app.route('/fiche_nom/', methods=['GET', 'POST'])
