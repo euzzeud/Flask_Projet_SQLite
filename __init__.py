@@ -138,7 +138,7 @@ def search_results():
     data = []
 
     if request.method == 'POST':
-        nom = request.form['title']
+        title = request.form['title']
 
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
