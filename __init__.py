@@ -143,7 +143,7 @@ def search_results():
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
         cursor.execute(
-            'SELECT * FROM clients WHERE title LIKE ?',
+            'SELECT * FROM clients WHERE titre LIKE ?',
             ('%' + title + '%',)
         )
         data = cursor.fetchall()
