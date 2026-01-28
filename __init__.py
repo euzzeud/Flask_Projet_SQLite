@@ -134,13 +134,13 @@ def search_results():
     data = []
 
     if request.method == 'POST':
-        title = request.form['title']
+        titre = request.form['titre']
 
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
         cursor.execute(
             'SELECT * FROM clients WHERE titre LIKE ?',
-            ('%' + title + '%',)
+            ('%' + titre + '%',)
         )
         data = cursor.fetchall()
         conn.close()
