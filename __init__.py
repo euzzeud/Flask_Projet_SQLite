@@ -119,8 +119,8 @@ def fiche_nom():
 
 # Séquence 6
 
-@app.route('/livres/')
-def ReadBDD():
+@app.route('/livres')
+def ReadBDDForBooks():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM livres;')
