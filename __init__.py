@@ -128,6 +128,28 @@ def ReadBDDForBooks():
     conn.close()
     return render_template('read_data_books.html', data=data)
 
+
+@app.route('/recherche_livre/', methods=['GET', 'POST'])
+def search_results():
+    # Protection USER
+    if not est_authentifie_user():
+        return redirect(url_for('authentification_user'))
+
+    data = []
+
+    if request.method == 'POST':
+        nom = request.form['title']
+
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        cursor.execute(
+            'SELECT * FROM clients WHERE title LIKE ?',
+            ('%' + title + '%',)
+        )
+        data = cursor.fetchall()
+        conn.close()
+
+    return render_template('search_books.html', data=data)
                                                                                                                                        
 if __name__ == "__main__":
   app.run(debug=True)

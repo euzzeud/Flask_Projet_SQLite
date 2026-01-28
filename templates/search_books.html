@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Recherche de livre</title>
+</head>
+<body>
+    <h2>Recherche de livre</h2>
+
+    <form method="post">
+        <input type="text" name="title" placeholder="Titre du livre" required>
+        <button type="submit">Rechercher</button>
+    </form>
+
+    {% if data %}
+        <h3>Résultats :</h3>
+        <table border="1">
+            <tr>
+            <th>ID</th>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Nombre d'exemplaire</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+        </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
