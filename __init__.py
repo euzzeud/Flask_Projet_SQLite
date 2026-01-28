@@ -117,6 +117,17 @@ def fiche_nom():
 
     return render_template('fiche_nom.html', data=data)
 
+# Séquence 6
+
+@app.route('/livres/')
+def ReadBDD():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM livres;')
+    data = cursor.fetchall()
+    conn.close()
+    return render_template('read_data_books.html', data=data)
+
                                                                                                                                        
 if __name__ == "__main__":
   app.run(debug=True)
