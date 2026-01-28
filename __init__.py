@@ -131,10 +131,6 @@ def ReadBDDForBooks():
 
 @app.route('/recherche_livre/', methods=['GET', 'POST'])
 def search_results():
-    # Protection USER
-    if not est_authentifie_user():
-        return redirect(url_for('authentification_user'))
-
     data = []
 
     if request.method == 'POST':
