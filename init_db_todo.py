@@ -2,7 +2,7 @@ import sqlite3
 
 connection = sqlite3.connect("database_todo.db")
 
-with open("schema.sql", "r", encoding="utf-8") as f:
+with open("schema_todo.sql", "r", encoding="utf-8") as f:
     connection.executescript(f.read())
 
 cur = connection.cursor()
