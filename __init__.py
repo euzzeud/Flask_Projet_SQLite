@@ -137,7 +137,6 @@ def get_todo_db():
 
 @app.get("/todo/")
 def todo_home():
-    # IMPORTANT: ce template doit exister dans templates/
     return render_template("home_todo.html")
 
 @app.get("/todo/tasks")
