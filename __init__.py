@@ -169,18 +169,18 @@ def todo_home():
 @app.get("/todo/tasks")
 def todo_tasks():
     filter_ = request.args.get("filter", "all")
-    db = get_db()
+    db_todo = get_db()
 
     if filter_ == "done":
-        rows = db.execute(
+        rows = db_todo.execute(
             "SELECT * FROM tasks WHERE is_done=1 ORDER BY created_at DESC"
         ).fetchall()
     elif filter_ == "active":
-        rows = db.execute(
+        rows = db_todo.execute(
             "SELECT * FROM tasks WHERE is_done=0 ORDER BY created_at DESC"
         ).fetchall()
     else:
-        rows = db.execute(
+        rows = db_todo.execute(
             "SELECT * FROM tasks ORDER BY created_at DESC"
         ).fetchall()
 
