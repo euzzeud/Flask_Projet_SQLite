@@ -148,11 +148,8 @@ input, textarea {
 }
 
 .task-title { font-weight: 700; }
-
 .task-desc { margin-top: 4px; color: #444; }
-
 .task-meta { margin-top: 6px; font-size: 12px; color: #666; }
-
 .muted { color: #888; }
 
 .task.done { opacity: .7; }

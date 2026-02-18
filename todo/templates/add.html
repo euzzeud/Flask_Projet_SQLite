@@ -1,4 +1,4 @@
-{% extends "header.html" %}
+{% extends "base.html" %}
 {% block title %}Ajouter{% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
 </header>
 
 <section class="card">
-  <form class="form" method="post" action="{{ url_for('todo.add_task') }}">
+  <form class="form" method="post" action="{{ url_for('todo_add_task') }}">
     <label class="label">
       Titre
       <input name="title" type="text" maxlength="60" required placeholder="Ex: Acheter du pain" />

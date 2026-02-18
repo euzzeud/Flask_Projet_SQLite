@@ -1,4 +1,4 @@
-{% extends "header.html" %}
+{% extends "base.html" %}
 {% block title %}Accueil{% endblock %}
 
 {% block content %}
@@ -12,8 +12,8 @@
 <section class="card">
   <p>Bienvenue. Tu peux consulter la liste des tâches ou en ajouter une nouvelle.</p>
   <div class="row">
-    <a class="btn link" href="{{ url_for('todo.tasks') }}">Voir les tâches</a>
-    <a class="btn link" href="{{ url_for('todo.new_task') }}">Ajouter</a>
+    <a class="btn link" href="{{ url_for('todo_tasks') }}">Voir les tâches</a>
+    <a class="btn link" href="{{ url_for('todo_new_task') }}">Ajouter</a>
   </div>
 </section>
 {% endblock %}

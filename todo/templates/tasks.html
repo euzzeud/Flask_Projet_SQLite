@@ -1,4 +1,4 @@
-{% extends "header.html" %}
+{% extends "base.html" %}
 {% block title %}Tâches{% endblock %}
 
 {% block content %}
@@ -12,20 +12,20 @@
 <section class="card">
   <div class="filters">
     <a class="pill {% if filter=='all' %}is-active{% endif %}"
-       href="{{ url_for('todo.tasks', filter='all') }}">Toutes</a>
+       href="{{ url_for('todo_tasks', filter='all') }}">Toutes</a>
 
     <a class="pill {% if filter=='active' %}is-active{% endif %}"
-       href="{{ url_for('todo.tasks', filter='active') }}">En cours</a>
+       href="{{ url_for('todo_tasks', filter='active') }}">En cours</a>
 
     <a class="pill {% if filter=='done' %}is-active{% endif %}"
-       href="{{ url_for('todo.tasks', filter='done') }}">Terminées</a>
+       href="{{ url_for('todo_tasks', filter='done') }}">Terminées</a>
   </div>
 </section>
 
 <section class="list">
   {% for t in tasks %}
     <article class="task card {% if t['is_done'] %}done{% endif %}">
-      <form method="post" action="{{ url_for('todo.toggle_task', task_id=t['id'], filter=filter) }}">
+      <form method="post" action="{{ url_for('todo_toggle_task', task_id=t['id'], filter=filter) }}">
         <button class="check" type="submit" title="Terminer / Réouvrir">
           {% if t['is_done'] %}✓{% else %}○{% endif %}
         </button>
@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <form method="post" action="{{ url_for('todo.delete_task', task_id=t['id'], filter=filter) }}">
+      <form method="post" action="{{ url_for('todo_delete_task', task_id=t['id'], filter=filter) }}">
         <button class="del" type="submit" title="Supprimer">🗑</button>
       </form>
     </article>
