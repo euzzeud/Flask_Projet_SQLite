@@ -163,7 +163,7 @@ def get_db():
 
 @app.get("/todo/")
 def todo_home():
-    return render_template("index.html")
+    return render_template("home_todo.html")
 
 
 @app.get("/todo/tasks")
