@@ -1,0 +1,58 @@
+{% extends "header.html" %}
+{% block title %}Tâches{% endblock %}
+
+{% block content %}
+<header class="topbar">
+  <div>
+    <h2>Mes tâches</h2>
+    <p class="sub">Liste, suppression, échéance, terminé</p>
+  </div>
+</header>
+
+<section class="card">
+  <div class="filters">
+    <a class="pill {% if filter=='all' %}is-active{% endif %}"
+       href="{{ url_for('todo.tasks', filter='all') }}">Toutes</a>
+
+    <a class="pill {% if filter=='active' %}is-active{% endif %}"
+       href="{{ url_for('todo.tasks', filter='active') }}">En cours</a>
+
+    <a class="pill {% if filter=='done' %}is-active{% endif %}"
+       href="{{ url_for('todo.tasks', filter='done') }}">Terminées</a>
+  </div>
+</section>
+
+<section class="list">
+  {% for t in tasks %}
+    <article class="task card {% if t['is_done'] %}done{% endif %}">
+      <form method="post" action="{{ url_for('todo.toggle_task', task_id=t['id'], filter=filter) }}">
+        <button class="check" type="submit" title="Terminer / Réouvrir">
+          {% if t['is_done'] %}✓{% else %}○{% endif %}
+        </button>
+      </form>
+
+      <div class="task-body">
+        <div class="task-title">{{ t['title'] }}</div>
+
+        {% if t['description'] %}
+          <div class="task-desc">{{ t['description'] }}</div>
+        {% endif %}
+
+        <div class="task-meta">
+          {% if t['due_date'] %}
+            <span>Échéance : {{ t['due_date'] }}</span>
+          {% else %}
+            <span class="muted">Pas d’échéance</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <form method="post" action="{{ url_for('todo.delete_task', task_id=t['id'], filter=filter) }}">
+        <button class="del" type="submit" title="Supprimer">🗑</button>
+      </form>
+    </article>
+  {% else %}
+    <div class="card">Aucune tâche pour l’instant.</div>
+  {% endfor %}
+</section>
+{% endblock %}

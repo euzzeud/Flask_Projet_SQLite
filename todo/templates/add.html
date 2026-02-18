@@ -1,0 +1,32 @@
+{% extends "header.html" %}
+{% block title %}Ajouter{% endblock %}
+
+{% block content %}
+<header class="topbar">
+  <div>
+    <h2>Ajouter une tâche</h2>
+    <p class="sub">Titre, description et date d’échéance</p>
+  </div>
+</header>
+
+<section class="card">
+  <form class="form" method="post" action="{{ url_for('todo.add_task') }}">
+    <label class="label">
+      Titre
+      <input name="title" type="text" maxlength="60" required placeholder="Ex: Acheter du pain" />
+    </label>
+
+    <label class="label">
+      Date d’échéance
+      <input name="due_date" type="date" />
+    </label>
+
+    <label class="label">
+      Description
+      <textarea name="description" rows="3" placeholder="Optionnel"></textarea>
+    </label>
+
+    <button class="btn" type="submit">Ajouter</button>
+  </form>
+</section>
+{% endblock %}

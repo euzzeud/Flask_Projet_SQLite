@@ -1,0 +1,19 @@
+{% extends "header.html" %}
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<header class="topbar">
+  <div>
+    <h2>Accueil</h2>
+    <p class="sub">Mini application de gestion de tâches</p>
+  </div>
+</header>
+
+<section class="card">
+  <p>Bienvenue. Tu peux consulter la liste des tâches ou en ajouter une nouvelle.</p>
+  <div class="row">
+    <a class="btn link" href="{{ url_for('todo.tasks') }}">Voir les tâches</a>
+    <a class="btn link" href="{{ url_for('todo.new_task') }}">Ajouter</a>
+  </div>
+</section>
+{% endblock %}
