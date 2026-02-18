@@ -9,11 +9,11 @@ ef get_db():
     conn.row_factory = sqlite3.Row
     return conn
 
-@bp.get("/")
+@bp.get("/todo/")
 def index():
     return redirect(url_for("todo.tasks"))
 
-@bp.get("/tasks")
+@bp.get("/todo/tasks")
 def tasks():
     filter_ = request.args.get("filter", "all")
     db = get_db()
@@ -28,11 +28,11 @@ def tasks():
     db.close()
     return render_template("tasks.html", tasks=rows, filter=filter_)
 
-@bp.get("/tasks/new")
+@bp.get("/todo/tasks/new")
 def new_task():
     return render_template("add.html")
 
-@bp.post("/tasks")
+@bp.post("/todo/tasks")
 def add_task():
     title = request.form.get("title", "").strip()
     description = request.form.get("description", "").strip()
@@ -50,7 +50,7 @@ def add_task():
     db.close()
     return redirect(url_for("todo.tasks"))
 
-@bp.post("/tasks/<int:task_id>/toggle")
+@bp.post("/todo/tasks/<int:task_id>/toggle")
 def toggle_task(task_id):
     db = get_db()
     db.execute(
@@ -61,7 +61,7 @@ def toggle_task(task_id):
     db.close()
     return redirect(url_for("todo.tasks", filter=request.args.get("filter", "all")))
 
-@bp.post("/tasks/<int:task_id>/delete")
+@bp.post("/todo/tasks/<int:task_id>/delete")
 def delete_task(task_id):
     db = get_db()
     db.execute("DELETE FROM tasks WHERE id=?", (task_id,))
