@@ -1,19 +1,23 @@
-from flask import Flask
-from routes import bp
+from flask import Flask, render_template_string, render_template, jsonify, request, redirect, url_for, session
+from flask import render_template
+from flask import json
+from urllib.request import urlopen
+from werkzeug.utils import secure_filename
+import sqlite3
 
-app = Flask(__name__)
+app = Flask(__name__) 
 
 
-ef get_db():
+def get_db():
     conn = sqlite3.connect("database_todo.db")
     conn.row_factory = sqlite3.Row
     return conn
 
-@bp.get("/todo/")
+@app.get("/todo/")
 def index():
     return redirect(url_for("todo.tasks"))
 
-@bp.get("/todo/tasks")
+@app.get("/todo/tasks")
 def tasks():
     filter_ = request.args.get("filter", "all")
     db = get_db()
@@ -28,11 +32,11 @@ def tasks():
     db.close()
     return render_template("tasks.html", tasks=rows, filter=filter_)
 
-@bp.get("/todo/tasks/new")
+@app.get("/todo/tasks/new")
 def new_task():
     return render_template("add.html")
 
-@bp.post("/todo/tasks")
+@app.post("/todo/tasks")
 def add_task():
     title = request.form.get("title", "").strip()
     description = request.form.get("description", "").strip()
@@ -50,7 +54,7 @@ def add_task():
     db.close()
     return redirect(url_for("todo.tasks"))
 
-@bp.post("/todo/tasks/<int:task_id>/toggle")
+@app.post("/todo/tasks/<int:task_id>/toggle")
 def toggle_task(task_id):
     db = get_db()
     db.execute(
@@ -61,7 +65,7 @@ def toggle_task(task_id):
     db.close()
     return redirect(url_for("todo.tasks", filter=request.args.get("filter", "all")))
 
-@bp.post("/todo/tasks/<int:task_id>/delete")
+@app.post("/todo/tasks/<int:task_id>/delete")
 def delete_task(task_id):
     db = get_db()
     db.execute("DELETE FROM tasks WHERE id=?", (task_id,))
