@@ -101,6 +101,7 @@ input, textarea {
   border: 1px solid #e6e7ea;
   border-radius: 12px;
   font: inherit;
+  resize: vertical;
 }
 
 /* Filters */
